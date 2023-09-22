@@ -1,0 +1,6 @@
+C:\Users\Administrator\source\repos\PROG6212POE\DataHandeling\bin\Debug\DataHandeling.dll
+C:\Users\Administrator\source\repos\PROG6212POE\DataHandeling\bin\Debug\DataHandeling.pdb
+C:\Users\Administrator\source\repos\PROG6212POE\DataHandeling\obj\Debug\DataHandeling.csproj.AssemblyReference.cache
+C:\Users\Administrator\source\repos\PROG6212POE\DataHandeling\obj\Debug\DataHandeling.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\PROG6212POE\DataHandeling\obj\Debug\DataHandeling.dll
+C:\Users\Administrator\source\repos\PROG6212POE\DataHandeling\obj\Debug\DataHandeling.pdb

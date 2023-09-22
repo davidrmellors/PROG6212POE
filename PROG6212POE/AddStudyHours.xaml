@@ -1,0 +1,264 @@
+﻿<Page
+    x:Class="PROG6212POE.AddStudyHours"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PROG6212POE"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="AddStudyHours"
+    d:DesignHeight="525"
+    d:DesignWidth="720"
+    FontFamily="/Fonts/#Poppins"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+
+        <Border
+            Grid.Row="0"
+            Height="60"
+            Margin="5"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Label
+                    x:Name="ModuleNameLabel"
+                    VerticalAlignment="Center"
+                    Content=""
+                    FontSize="24" />
+            </StackPanel>
+        </Border>
+
+
+        <Border
+            Grid.Row="2"
+            Height="60"
+            Margin="5"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Label
+                    VerticalAlignment="Center"
+                    Content="Self-Study Hours required per week: "
+                    FontSize="24" />
+                <Label
+                    x:Name="HoursRequiredLabel"
+                    Width="100"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Background="Transparent"
+                    Content=""
+                    FontSize="20" />
+            </StackPanel>
+        </Border>
+
+        <Border
+            Grid.Row="3"
+            Height="60"
+            Margin="5"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Label
+                    VerticalAlignment="Center"
+                    Content="Week Number: "
+                    FontSize="24" />
+                <Label
+                    x:Name="WeekNumberLabel"
+                    Width="100"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Background="Transparent"
+                    Content=""
+                    FontSize="20" />
+            </StackPanel>
+        </Border>
+
+        <Border
+            Grid.Row="4"
+            Height="60"
+            Margin="5"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Label
+                    VerticalAlignment="Center"
+                    Content="Self-Study hours remaining: "
+                    FontSize="24" />
+                <Label
+                    x:Name="HoursRemainingLabel"
+                    Width="100"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Background="Transparent"
+                    Content=""
+                    FontSize="20" />
+            </StackPanel>
+        </Border>
+
+
+
+
+
+        <Border
+            Grid.Row="1"
+            Height="180"
+            Margin="5"
+            BorderBrush="Black"
+            BorderThickness="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="600"
+                    HorizontalContentAlignment="Center"
+                    Content="Add study hours"
+                    FontSize="24" />
+
+
+                <StackPanel
+                    Grid.Row="1"
+                    HorizontalAlignment="Center"
+                    Orientation="Vertical">
+
+                    <Label
+                        Margin="0,0,0,0"
+                        HorizontalContentAlignment="Left"
+                        Content="Date"
+                        FontSize="16" />
+
+                    <Border
+                        Width="150"
+                        Height="30"
+                        Background="White"
+                        CornerRadius="10">
+                        <Grid>
+                            <Rectangle StrokeThickness="1" />
+                            <DatePicker
+                                x:Name="StudyDate_DatePicker"
+                                Width="150"
+                                VerticalContentAlignment="Center"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                FontSize="14"
+                                SelectedDateChanged="StudyDate_DatePicker_SelectedDateChanged" />
+                        </Grid>
+                    </Border>
+
+                    <Label
+                        x:Name="StudyDateErrorLabel"
+                        Width="250"
+                        Height="auto"
+                        HorizontalContentAlignment="Center"
+                        Background="Transparent"
+                        Content=""
+                        FontSize="8"
+                        Foreground="#b05656" />
+
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    Orientation="Vertical">
+
+                    <Label
+                        Margin="0,0,0,0"
+                        HorizontalContentAlignment="Left"
+                        Content="Number of hours studied"
+                        FontSize="16" />
+
+                    <Border
+                        Width="100"
+                        Height="30"
+                        Background="White"
+                        CornerRadius="10">
+                        <Grid>
+                            <Rectangle StrokeThickness="1" />
+                            <TextBox
+                                x:Name="StudyHoursTxtBox"
+                                Margin="1"
+                                Padding="5"
+                                VerticalContentAlignment="Center"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Foreground="#0d0d0d"
+                                Text="" />
+                            <TextBlock
+                                Grid.Column="1"
+                                Margin="10,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                FontSize="11"
+                                Foreground="#878787"
+                                IsHitTestVisible="False"
+                                Text="12">
+
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=StudyHoursTxtBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Visibility" Value="Hidden" />
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+
+                    <Label
+                        x:Name="StudyHoursErrorLabel"
+                        Width="250"
+                        Height="auto"
+                        HorizontalContentAlignment="Center"
+                        Background="Transparent"
+                        Content=""
+                        FontSize="8"
+                        Foreground="#b05656" />
+
+                </StackPanel>
+
+                <Button
+                    x:Name="UpdateBtn"
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="100"
+                    Height="30"
+                    VerticalAlignment="Center"
+                    Background="#56b077"
+                    BorderBrush="Black"
+                    BorderThickness="1"
+                    Click="Update_Click"
+                    Content="update"
+                    FontSize="14"
+                    Foreground="Black" />
+
+
+            </Grid>
+
+        </Border>
+
+    </Grid>
+</Page>
