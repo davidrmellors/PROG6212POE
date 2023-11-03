@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace DataHandeling
@@ -86,6 +87,42 @@ namespace DataHandeling
                 result = true;
             }
             return result;
+        }
+
+        // Validates user password
+        public static string IsPasswordValid(string password)
+        {
+            if (string.IsNullOrWhiteSpace(password))
+                return "* Password cannot be empty!";
+
+            // Password criteria
+            int requiredLength = 8; // Minimum password length
+            bool requireUppercase = true;
+            bool requireLowercase = true;
+            bool requireDigit = true;
+            bool requireSpecialChar = true;
+
+            // Check length
+            if (password.Length < requiredLength)
+                return "* Password length must be 8 or more characters!";
+
+            // Check uppercase letters
+            if (requireUppercase && !password.Any(char.IsUpper))
+                return "* Password must contain at least 1 upper case character!";
+
+            // Check lowercase letters
+            if (requireLowercase && !password.Any(char.IsLower))
+                return "* Password must contain at least 1 lower case character!";
+
+            // Check digits
+            if (requireDigit && !password.Any(char.IsDigit))
+                return "* Password must contain at least 1 digit!";
+
+            // Check special characters (you can customize this pattern)
+            if (requireSpecialChar && !Regex.IsMatch(password, @"[!@#$%^&*()]"))
+                return "* Password must contain at least one symbol !@#$%^&*()";
+
+            return "";
         }
     }
 

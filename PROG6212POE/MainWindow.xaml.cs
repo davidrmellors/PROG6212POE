@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Configuration.Provider;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,14 +31,24 @@ namespace PROG6212POE
         public MainWindow()
         {
             // Initialize the main window
-            InitializeComponent();
-
+            InitializeComponent();   
             // Navigate to the HomePage when the application starts
             Main.NavigationService.Navigate(new HomePage());
 
             // Clear and set the item source for the ModuleListView
             ModuleListView.Items.Clear();
-            ModuleListView.ItemsSource = AddModule.modules;
+
+            using (var context = new MyDbContext())
+            {
+                var data = context.Modules.ToList(); // Replace YourDbSet with the name of your entity DbSet
+                foreach (var item in data)
+                {
+                    // Process and display data...
+                    Console.WriteLine(item);
+                }
+            }
+
+
         }
 
         // Event handler for the "Add Module" button click
@@ -69,7 +80,7 @@ namespace PROG6212POE
             Module selectedModule = ModuleListView.SelectedItem as Module;
 
             // Navigate to the AddStudyHours page with the selected module
-            Main.NavigationService.Navigate(new AddStudyHours(selectedModule));
+            Main.NavigationService.Navigate(new AddStudyHours());
         }
 
         // Event handler for the ModuleCodeSearchBox key down event
@@ -101,7 +112,7 @@ namespace PROG6212POE
                     ModuleListView.SelectedItem = matchingModule;
                     SearchBoxErrorLabel.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#56b077"));
                     SearchBoxErrorLabel.Content = "* Module found!";
-                    Main.NavigationService.Navigate(new AddStudyHours(matchingModule));
+                    Main.NavigationService.Navigate(new AddStudyHours());
                 }
                 else
                 {
@@ -110,6 +121,13 @@ namespace PROG6212POE
                 }
             }
         }
+
+        private void LoginBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Main.NavigationService.Navigate(new Login());
+        }
+
+        
     }
 
 }

@@ -20,6 +20,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DataHandeling;
+using DataHandeling.Models;
+using System.Configuration;
 
 namespace PROG6212POE
 {
@@ -29,7 +31,7 @@ namespace PROG6212POE
     public partial class AddModule : Page
     {
         // Collection to store modules
-        /*public static ObservableCollection<Module> modules = new ObservableCollection<Module>();*/
+        public static ObservableCollection<Module> modules = new ObservableCollection<Module>();
 
         // Constructor for the AddModule page
         public AddModule()
@@ -38,7 +40,7 @@ namespace PROG6212POE
         }
 
         // Event handler for the Save button click
-        private void SaveBtn_Click(object sender, RoutedEventArgs e)
+        private async void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             // Validate and process user input
 
@@ -96,25 +98,55 @@ namespace PROG6212POE
             StartDateErrorLabel.Content = "";
 
             // Retrieve user input and create a new module
-            string moduleCode = ModuleCodeTxtBox.Text;
-            string moduleName = ModuleNameTxtBox.Text;
-            int numberOfCredits = int.Parse(NumberOfCreditsTxtBox.Text);
-            double classHours = double.Parse(ClassHoursTxtBox.Text);
-            int numberOfWeeks = int.Parse(NumberOfWeeksTxtBox.Text);
-            DateTime startDate = StartDate_DatePicker.SelectedDate.Value;
+            
 
-            Module module = new Module(moduleCode, moduleName, numberOfCredits, classHours, numberOfWeeks, startDate);
+            using (var db = new MyDbContext())
+            {
+                string moduleCode = ModuleCodeTxtBox.Text;
+                string moduleName = ModuleNameTxtBox.Text;
+                int numberOfCredits = int.Parse(NumberOfCreditsTxtBox.Text);
+                double classHours = double.Parse(ClassHoursTxtBox.Text);
+                int numberOfWeeks = int.Parse(NumberOfWeeksTxtBox.Text);
+                DateTime startDate = StartDate_DatePicker.SelectedDate.Value;
 
-            // Clear input fields
-            ModuleCodeTxtBox.Clear();
-            ModuleNameTxtBox.Clear();
-            NumberOfCreditsTxtBox.Clear();
-            ClassHoursTxtBox.Clear();
-            NumberOfWeeksTxtBox.Clear();
-            StartDate_DatePicker.SelectedDate = null;
+                var modules = new Module
+                {
+                    ModuleCode = moduleCode,
+                    ModuleName = moduleName,
+                    NumberOfCredits = numberOfCredits,
+                    ClassHoursPerWeek = classHours,
+                    NumberOfWeeks = numberOfWeeks,
+                    StartDate = startDate,
+                    Username = UserAuthentication.LoggedInUser
+                };
 
-            // Navigate to the AddStudyHours page with the created module
-            NavigationService.Navigate(new AddStudyHours(module));
+/*              User user = db.Users.FirstOrDefault(u => u.Username == UserAuthentication.LoggedInUser);
+                user.Modules.Add(modules);*/
+
+                db.Modules.Add(modules);
+                db.SaveChanges();
+
+                // Clear input fields
+                ModuleCodeTxtBox.Clear();
+                ModuleNameTxtBox.Clear();
+                NumberOfCreditsTxtBox.Clear();
+                ClassHoursTxtBox.Clear();
+                NumberOfWeeksTxtBox.Clear();
+                StartDate_DatePicker.SelectedDate = null;
+
+                //Update itemsource
+                if (Application.Current.MainWindow is MainWindow mainWindow)
+                {
+                    ListView moduleListView = mainWindow.FindName("ModuleListView") as ListView;
+
+                    if (moduleListView != null)
+                    {
+                        moduleListView.ItemsSource = await UserAuthentication.GetModulesForUsername();
+                    }
+                }
+                // Navigate to the AddStudyHours page with the created module
+                NavigationService.Navigate(new AddStudyHours());
+            }            
         }
 
         // Event handler for the Back button click

@@ -56,6 +56,16 @@
                         FontSize="20"
                         Foreground="Black" />
                     <Button
+                        x:Name="LoginBtn"
+                        Width="150"
+                        Background="Transparent"
+                        BorderBrush="Black"
+                        BorderThickness="0,0,1,0"
+                        Click="LoginBtn_Click"
+                        Content="Login"
+                        FontSize="20"
+                        Foreground="Black" />
+                    <Button
                         x:Name="ExitBtn"
                         Width="150"
                         Background="Transparent"
@@ -150,7 +160,8 @@
                         Click="AddModuleBtn_Click"
                         Content="+ Add Module"
                         FontSize="14"
-                        Foreground="Black" />
+                        Foreground="Black"
+                        Visibility="Hidden" />
                 </StackPanel>
             </Border>
 
