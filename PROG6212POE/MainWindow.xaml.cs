@@ -37,6 +37,7 @@ namespace PROG6212POE
 
             // Clear and set the item source for the ModuleListView
             ModuleListView.Items.Clear();
+           
 
             using (var context = new MyDbContext())
             {
@@ -47,6 +48,8 @@ namespace PROG6212POE
                     Console.WriteLine(item);
                 }
             }
+
+            
 
 
         }

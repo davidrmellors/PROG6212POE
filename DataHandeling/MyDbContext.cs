@@ -18,10 +18,5 @@ namespace DataHandeling
         { 
         }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            // Configure your model here if needed
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }
