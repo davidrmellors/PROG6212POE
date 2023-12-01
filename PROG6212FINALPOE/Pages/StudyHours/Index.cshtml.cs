@@ -7,6 +7,7 @@ using DataHandeling.Services;
 using DataHandeling.Repository;
 using System.Text.Json;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace PROG6212FINALPOE.Pages.StudyHours
 {
@@ -38,7 +39,9 @@ namespace PROG6212FINALPOE.Pages.StudyHours
         [BindProperty]
         public double SelfStudyHoursRequired { get; set; }
 
+
         [BindProperty]
+        [Required(ErrorMessage = "This field is required")]
         public string StudyHours { get; set;}
         [BindProperty]
         public string StudyHoursError { get; set; }
@@ -47,6 +50,7 @@ namespace PROG6212FINALPOE.Pages.StudyHours
         public string WeekNumber { get; set; }
 
         [BindProperty]
+        [Required(ErrorMessage = "This field is required")]
         public string StudyDate { get; set; }
 
         [BindProperty]
@@ -98,7 +102,7 @@ namespace PROG6212FINALPOE.Pages.StudyHours
             StudyHoursError = string.Empty;
 
             // Check and validate the selected study date
-            if (!ValidateInput.ValidateStartDate(StudyDate.ToString()))
+            if (string.IsNullOrEmpty(StudyDate)|| !ValidateInput.ValidateStartDate(StudyDate.ToString()))
             {
                 StudyDateError = "* Please select a valid study date!";
                 StudyDate = string.Empty;
