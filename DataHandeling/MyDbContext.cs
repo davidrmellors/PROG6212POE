@@ -23,15 +23,4 @@ namespace DataHandeling
         }
 
     }
-
-    public class MyDbContextFactory : IDesignTimeDbContextFactory<MyDbContext>
-    {
-        public MyDbContext CreateDbContext(string[] args)
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<MyDbContext>();
-            optionsBuilder.UseSqlServer("Server=(LocalDB)\\MSSQLLocalDB;Initial Catalog=prog6212db;Integrated Security=True");
-
-            return new MyDbContext(optionsBuilder.Options);
-        }
-    }
 }
