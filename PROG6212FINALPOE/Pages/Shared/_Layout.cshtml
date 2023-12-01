@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - StudyPlanner</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/PROG6212FINALPOE.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/materialize/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        html, body {
+            height: 100%; /* Make sure the html and body fill the height of the viewport */
+            margin: 0; /* Reset any default margin */
+        }
+
+        body {
+            display: flex; /* Use flexbox to layout children */
+            flex-direction: column; /* Stack children vertically */
+        }
+
+        .container {
+            flex: 1; /* Allow the container to grow and fill the space */
+            overflow-y: auto; /* Add scroll to the container if content overflows */
+        }
+
+        footer {
+            flex-shrink: 0; /* Prevent the footer from growing but allow it to shrink if needed */
+        }
+    </style>
+</head>
+<body>
+<div class="main-container" style="display: flex; flex-direction: column; min-height: 100vh;">
+    <nav class="nav-extended blue">
+        <div class="nav-wrapper container">
+            <a href="#" class="brand-logo">StudyPlanner</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+                    <i class="material-icons">menu</i>
+                </a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    @if (string.IsNullOrEmpty(User.Identity.Name))
+                    {
+                        <li><a href="@Url.Page("/Register/Index")" class="white-text" style="font-weight: 600;">Register</a></li>
+                        <li><a href="@Url.Page("/Login/Index")" class="white-text" style="font-weight: 600;">Login</a></li>
+                    }
+                    else
+                    {
+                        <li>
+                            <form method="post" asp-page="/Logout/Index">
+                                <button type="submit" class="btn-flat white-text" style="font-weight: 600;">Log out</button>
+                            </form>
+                        </li>
+                    }
+
+                <!-- Add other navigation links here -->
+            </ul>
+        </div>
+    </nav>
+
+    <ul class="sidenav" id="mobile-demo">
+        @if (string.IsNullOrEmpty(User.Identity.Name))
+            {
+                <li><a href="@Url.Page("/Register/Index")">Register</a></li>
+                <li><a href="@Url.Page("/Login/Index")">Login</a></li>
+            }
+            else
+            {
+                <li>
+                    <form method="post" asp-page="/Logout/Index">
+                        <button type="submit" class="btn-flat" style="font-weight: 600;">Log out</button>
+                    </form>
+                </li>
+            }
+        <!-- Add other navigation links here -->
+    </ul>
+
+    <main role="main" style="flex: 1; padding: 1% 10% 2% 10%;">
+        @RenderBody()
+    </main>
+
+    
+
+    <footer class="border-top footer text-muted" style="position:relative;">
+        <div class="container">
+            &copy; 2023 - StudyPlanner - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/materialize/js/materialize.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems, {});
+        });
+    </script>
+
+</body>
+</html>

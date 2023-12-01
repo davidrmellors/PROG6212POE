@@ -1,0 +1,188 @@
+﻿@page
+@model PROG6212FINALPOE.Pages.StudyHours.IndexModel
+@{
+    ViewData["Title"] = "Record Study Hours";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <!-- Compiled and minified CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1 0 auto; /* This will push the footer down */
+            padding-bottom: 2rem; /* Give some space at the bottom */
+        }
+
+
+        .input-field label {
+            color: #9e9e9e;
+        }
+
+        .input-field input[type=text]:focus + label,
+        .input-field input[type=date]:focus + label {
+            color: #26a69a;
+        }
+
+        .input-field input[type=text]:focus,
+        .input-field input[type=date]:focus {
+            border-bottom: 1px solid #26a69a;
+            box-shadow: 0 1px 0 0 #26a69a;
+        }
+
+        .badge {
+            font-weight: normal;
+            font-size: 16px;
+        }
+
+        .section {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 95%;
+            margin: auto;
+        }
+
+        .header {
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            background-color: #26a69a; /* Teal color */
+        }
+
+        .card {
+            max-width: 100%; /* Ensures the card does not overflow the width of the container */
+            margin: 0 auto; /* Centers the card within its section */
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h4 class="header center-align">@ViewData["Title"]</h4>
+
+        <div class="section">
+            <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                    <span class="card-title" id="ModuleNameLabel">@Model.Module.ModuleName</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="card light-blue lighten-3">
+                <div class="card-content black-text">
+                    <span class="card-title">
+                        Self-Study Hours required per week:
+                        <strong id="HoursRequiredLabel">@Model.SelfStudyHoursRequired</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <form id="studyHoursForm" method="post" asp-antiforgery="true">
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <input asp-for="StudyDate" type="date" id="StudyDate" class="datepicker" value="@Model.StudyDate">
+                    <label for="StudyDate">Date</label>
+                    <span asp-validation-for="StudyDate" id="StudyDateErrorLabel" class="text-danger">@Model.StudyDateError</span>
+                </div>
+                <div class="input-field col s12 m6">
+                    <input asp-for="StudyHours" type="text" id="StudyHours" value="@Model.StudyHours" >
+                    <label for="StudyHours">Number of hours studied</label>
+                    <span id ="StudyHoursError" asp-validation-for="StudyHours" class="text-danger">@Model.StudyHoursError</span>
+                </div>
+            </div>
+
+            <div class="section center-align">
+                <button class="btn waves-effect waves-light" type="submit" id="UpdateBtn">
+                    Update
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+
+            <div class="section">
+                <div class="card teal lighten-2">
+                    <div class="card-content white-text">
+                        <span class="card-title">Week Number: <strong id="weekNumber-span">@Model.WeekNumber</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="card orange lighten-2">
+                    <div class="card-content white-text">
+                        <span class="card-title">Self Study Hours Remaining: <strong id="hoursRemaining-span">@Model.HoursLeft</strong></span>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div>
+            <a asp-page="/Modules/Index">Back to List</a>
+        </div>
+    </main>
+
+<script>
+    console.log(document.getElementById('StudyDate'));
+    document.getElementById('StudyDate').addEventListener('change', function () {
+        var selectedDate = this.value;
+        callServerMethod(selectedDate);
+    });
+
+
+    function callServerMethod(selectedDate) {
+        console.log("Selected date:", selectedDate); // Add this to check the passed date
+            
+        fetch('/StudyHours/Index?handler=DateChange', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+            },
+            body: JSON.stringify({ date: selectedDate})
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Received data:", data);
+                // Assuming data contains weekNumber and selfStudyHours
+                updateWeekNumberLabel(data.weekNumber);
+                updateSelfStudyHoursLabel(data.hoursRemaining);
+                document.getElementById('ModuleNameLabel').innerText = data.moduleName;
+                document.getElementById('HoursRequiredLabel').innerText = data.selfStudyHoursRequired;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    function updateWeekNumberLabel(weekNumber) {
+        document.getElementById('weekNumber-span').innerText = weekNumber;
+    }
+
+    function updateSelfStudyHoursLabel(hoursRemaining) {
+        console.log(hoursRemaining);
+        document.getElementById('hoursRemaining-span').innerText = hoursRemaining;
+    }
+
+</script>
+
+</body>
+</html>

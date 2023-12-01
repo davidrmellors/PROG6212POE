@@ -1,0 +1,14 @@
+C:\Users\Administrator\source\repos\PROG6212FINALPOE\DataHandeling\bin\Debug\net6.0\DataHandeling.deps.json
+C:\Users\Administrator\source\repos\PROG6212FINALPOE\DataHandeling\bin\Debug\net6.0\DataHandeling.runtimeconfig.json
+C:\Users\Administrator\source\repos\PROG6212FINALPOE\DataHandeling\bin\Debug\net6.0\DataHandeling.dll
+C:\Users\Administrator\source\repos\PROG6212FINALPOE\DataHandeling\bin\Debug\net6.0\DataHandeling.pdb
+C:\Users\Administrator\source\repos\PROG6212FINALPOE\DataHandeling\obj\Debug\net6.0\DataHandeling.csproj.AssemblyReference.cache
+C:\Users\Administrator\source\repos\PROG6212FINALPOE\DataHandeling\obj\Debug\net6.0\DataHandeling.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\source\repos\PROG6212FINALPOE\DataHandeling\obj\Debug\net6.0\DataHandeling.AssemblyInfoInputs.cache
+C:\Users\Administrator\source\repos\PROG6212FINALPOE\DataHandeling\obj\Debug\net6.0\DataHandeling.AssemblyInfo.cs
+C:\Users\Administrator\source\repos\PROG6212FINALPOE\DataHandeling\obj\Debug\net6.0\DataHandeling.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\PROG6212FINALPOE\DataHandeling\obj\Debug\net6.0\DataHandeling.dll
+C:\Users\Administrator\source\repos\PROG6212FINALPOE\DataHandeling\obj\Debug\net6.0\refint\DataHandeling.dll
+C:\Users\Administrator\source\repos\PROG6212FINALPOE\DataHandeling\obj\Debug\net6.0\DataHandeling.pdb
+C:\Users\Administrator\source\repos\PROG6212FINALPOE\DataHandeling\obj\Debug\net6.0\DataHandeling.genruntimeconfig.cache
+C:\Users\Administrator\source\repos\PROG6212FINALPOE\DataHandeling\obj\Debug\net6.0\ref\DataHandeling.dll

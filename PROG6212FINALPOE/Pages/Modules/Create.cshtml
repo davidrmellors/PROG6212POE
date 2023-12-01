@@ -1,0 +1,65 @@
+﻿@page
+@model PROG6212FINALPOE.Pages.Modules.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Module</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <input type="hidden" asp-for="Module.Username" value="@User.Identity.Name" />
+            <input type="hidden" asp-for="Module.User" />
+
+            <div class="form-group">
+                <label asp-for="Module.ModuleCode" class="control-label"></label>
+                <input asp-for="Module.ModuleCode" class="form-control" />
+                <span asp-validation-for="Module.ModuleCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Module.ModuleName" class="control-label"></label>
+                <input asp-for="Module.ModuleName" class="form-control" />
+                <span asp-validation-for="Module.ModuleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Module.NumberOfCredits" class="control-label"></label>
+                <input asp-for="Module.NumberOfCredits" type="number" class="form-control" />
+                <span asp-validation-for="Module.NumberOfCredits" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Module.ClassHoursPerWeek" class="control-label"></label>
+                <input asp-for="Module.ClassHoursPerWeek" type="number" class="form-control" />
+                <span asp-validation-for="Module.ClassHoursPerWeek" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Module.NumberOfWeeks" class="control-label"></label>
+                <input asp-for="Module.NumberOfWeeks" type="number" class="form-control" />
+                <span asp-validation-for="Module.NumberOfWeeks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Module.StartDate" class="control-label"></label>
+                <input asp-for="Module.StartDate" type="date" class="form-control" />
+                <span asp-validation-for="Module.StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Module.StudyDay" class="control-label"></label>
+                <select asp-for="Module.StudyDay" asp-items="Html.GetEnumSelectList<DayOfWeek>()" class="form-control">
+                    <option value="">Select a day (optional)</option>
+                </select>
+                <span asp-validation-for="Module.StudyDay" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="margin-top: 10px;">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+

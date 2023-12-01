@@ -1,0 +1,115 @@
+﻿@page
+@model PROG6212FINALPOE.Pages.Modules.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        /* Custom styles */
+        .responsive-table table {
+            width: 100%;
+        }
+        
+        .button-cell a.btn {
+            display: block;
+            margin-bottom: 5px; /* Add space between buttons */
+            white-space: nowrap; /* Ensure text doesn't wrap */
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Ensure that the table cell containing buttons is wide enough */
+        .button-cell {
+            min-width: 200px; /* Adjust as necessary */
+        }
+
+        /* Responsive table styles */
+        @@media only screen and (max-width: 600px) {
+            .responsive-table {
+                overflow-x: auto; /* Horizontal scroll on small screens */
+            }
+        }
+
+        .study-day-card {
+            background-color: #A8D5BA; /* Pastel green */
+            border-left: 5px solid #5C946E; /* Darker shade for contrast */
+            padding: 16px;
+            margin: 16px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <h1>Modules</h1>
+
+        <p>
+            <a asp-page="Create" class="waves-effect waves-light blue btn">Create New</a>
+        </p>
+        @if (Model.TodayModules.Any())
+        {
+            <div class="section">
+                <h5>Today's Modules To Study</h5>
+                <div class="study-day-card">
+                    <div class="card-content white-text">
+                    <ul>
+                        @foreach (var module in Model.TodayModules)
+                        {
+                            <li><strong>@module.ModuleName</strong> - Time to study!</li>
+                        }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="section">
+                <h5>No modules planned for today.</h5>
+            </div>
+        }
+        <table class="responsive-table striped highlight">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Module[0].ModuleCode)</th>
+                    <th>@Html.DisplayNameFor(model => model.Module[0].ModuleName)</th>
+                    <th>@Html.DisplayNameFor(model => model.Module[0].NumberOfCredits)</th>
+                    <th>@Html.DisplayNameFor(model => model.Module[0].ClassHoursPerWeek)</th>
+                    <th>@Html.DisplayNameFor(model => model.Module[0].NumberOfWeeks)</th>
+                    <th>@Html.DisplayNameFor(model => model.Module[0].StartDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.Module[0].StudyDay)</th>
+
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Module)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.ModuleCode)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ModuleName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.NumberOfCredits)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ClassHoursPerWeek)</td>
+                        <td>@Html.DisplayFor(modelItem => item.NumberOfWeeks)</td>
+                        <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.StudyDay)</td>
+                        <td>
+                            <!-- Other action buttons -->
+                            <a asp-page="/StudyHours/Index" asp-route-id="@item.ModuleID" class="btn waves-effect waves-light deep-purple" style="min-width: 190px;">Record Study Hours</a>
+                            <a asp-page="./Edit" asp-route-id="@item.ModuleID" class="btn-small waves-effect waves-light blue">Edit</a>
+                            <a asp-page="./Details" asp-route-id="@item.ModuleID" class="btn-small waves-effect waves-light green">Details</a>
+                            <a asp-page="./Delete" asp-route-id="@item.ModuleID" class="btn-small waves-effect waves-light red">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

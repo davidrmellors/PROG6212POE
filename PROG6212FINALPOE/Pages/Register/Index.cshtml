@@ -1,0 +1,36 @@
+﻿@page
+@model PROG6212FINALPOE.Pages.Register.IndexModel
+@{
+    ViewData["Title"] = "Register";
+}
+<div class="register-container">
+    <h4 class="center-align">Register</h4>
+    <form method="post">
+        <div class="input-field">
+            <input asp-for="Username" id="username" type="text" class="validate @Model.UsernameClass" required>
+            <label for="username">Username</label>
+            <span asp-validation-for="Username" class="text-danger">@Model.UsernameErrorMessage</span>
+        </div>
+        <div class="input-field">
+            <input asp-for="Password" id="password" type="password" class="validate @Model.PasswordClass" required>
+            <label for="password">Password</label>
+            <span asp-validation-for="Password" class="text-danger">@Model.PasswordErrorMessage</span>
+        </div>
+        <div class="input-field">
+            <input asp-for="ConfirmPassword" id="confirm_password" type="password" class="validate @Model.ConfirmPasswordClass" required>
+            <label for="confirm_password">Confirm Password</label>
+            <span asp-validation-for="ConfirmPassword" class="text-danger">@Model.ConfirmPasswordErrorMessage</span>
+        </div>
+        <button class="btn waves-effect waves-light blue" type="submit">
+            Register
+            <i class="material-icons right">send</i>
+        </button>
+
+        <div class="section center-align">
+            <p>Already have an account? <a asp-page="/Login/Index">Login here</a></p>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
